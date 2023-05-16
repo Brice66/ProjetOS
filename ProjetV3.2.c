@@ -95,3 +95,18 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+/*
+La boucle while lit les données du canal de communication (pipefd[0]) dans le tableau result à partir de la position result + total_bytes. La fonction read est utilisée pour lire les données. La lecture se fait par morceaux de taille BUFFER_SIZE - total_bytes, et le nombre de bytes lus est stocké dans la variable nbytes.
+
+À chaque itération de la boucle, le nombre de bytes lus (nbytes) est ajouté à la variable total_bytes pour suivre le nombre total de bytes lus jusqu'à présent.
+
+La boucle continue de lire les données jusqu'à ce qu'il n'y ait plus de données à lire (nbytes <= 0), ce qui signifie que le processus fils a terminé d'écrire dans le canal de communication.
+
+Ensuite, la ligne wait(&status) attend la fin du processus fils. La fonction wait suspend l'exécution du processus père jusqu'à ce que le processus fils se termine, et le code de retour du processus fils est stocké dans la variable status.
+
+Après avoir attendu la fin du processus fils, le code vérifie si des bytes ont été lus à partir du canal (if (total_bytes > 0)). Si c'est le cas, il ajoute un caractère de fin de chaîne ('\0') à la fin du tableau result et affiche le résultat avec la commande exécutée.
+
+Si aucune donnée n'a été lue à partir du canal, il affiche un message d'erreur indiquant qu'il y a eu une erreur lors de la lecture du résultat.
+
+Enfin, la ligne printf("Le processus fils a terminé avec le code de retour %d.\n", WEXITSTATUS(status)); affiche le code de retour du processus fils à l'aide de la macro WEXITSTATUS. Elle extrait le code de retour à partir de la variable status retournée par la fonction wait.
+*/
