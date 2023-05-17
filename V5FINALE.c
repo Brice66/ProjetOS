@@ -57,10 +57,10 @@ int main(int argc, char *argv[]) {
                 dup2(pipefd[1], STDOUT_FILENO);
 
                 // Exécuter la commande
-                execl("/bin/sh", "sh", "-c", buffer, (char *) NULL);
-                //char *args[] = {"sh", "-c", buffer, NULL};
-                //execvp(args[0], args);
-                // Si execl renvoie, cela signifie qu'il y a eu une erreur
+               // execl("/bin/sh", "sh", "-c", buffer, (char *) NULL);
+                char *args[] = {"sh", "-c", buffer, NULL};
+                execvp(args[0], args);
+                //Si execl renvoie, cela signifie qu'il y a eu une erreur
                 printf("Erreur lors de l'exécution de la commande.\n");
                 exit(1);
             } else {
