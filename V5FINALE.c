@@ -92,8 +92,6 @@ int main(int argc, char *argv[]) {
                 }
                 printf("Le processus fils a terminé avec le code de retour %d.\n", WEXITSTATUS(status));
             }
-	// Fermer le fichier shell
-    	//fclose(shell_file);
 
     }
     
