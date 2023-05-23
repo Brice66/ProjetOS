@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
     // Boucle pour exécuter chaque fichier shell
     for (int i = 1; i < argc; i++) {
-	printf("j'ouvre le fichier\n");
+	//printf("j'ouvre le fichier\n");
         // Ouvrir le fichier shell
         FILE* shell_file = fopen(argv[i], "r");
         if (!shell_file) {
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
             pid = fork();
 
             if (pid == -1) {
-                printf("Erreur lors de la création du processus fils.\n");
+                //printf("Erreur lors de la création du processus fils.\n");
                 exit(1);
             } else if (pid == 0) {
                 // Nous sommes dans le processus fils
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
                 exit(1);
             } else {
                 // Nous sommes dans le processus père
-		printf("Bonjour, je suis le processus père\n");
+		//printf("Bonjour, je suis le processus père\n");
                 // Fermer l'extrémité d'écriture du canal
                 close(pipefd[1]);
 
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     		int total_bytes = 0;
                 while ((nbytes = read(pipefd[0], result + total_bytes, BUFFER_SIZE - total_bytes)) > 0) {
                     total_bytes += nbytes;
-                    printf("Lecture en cours\n");
+                    //printf("Lecture en cours\n");
                 }
 
                 // Fermer l'extrémité de lecture du canal
